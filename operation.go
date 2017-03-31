@@ -8,12 +8,12 @@ type ClientOperationBase struct {
 	client *docker_client.Client
 }
 
-func NewClientOperationBase(c *docker_client.Client) *ClientOperationBase{
+func NewClientOperationBase(c *docker_client.Client) *ClientOperationBase {
 	return &ClientOperationBase{
 		client: c,
 	}
 }
-func NewClientOperationBaseDefault() *ClientOperationBase{
+func NewClientOperationBaseDefault() *ClientOperationBase {
 	c, _ := DefaultClient() // @TODO we don't catch this error, but we will need to
 	return &ClientOperationBase{
 		client: c,
