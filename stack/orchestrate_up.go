@@ -10,6 +10,14 @@ const (
 	OPERATION_ID_ORCHESTRATE_UP = "orchestrate.up"
 )
 
+type deployOptions struct {
+	bundlefile       string
+	composefile      string
+	namespace        string
+	sendRegistryAuth bool
+	prune            bool
+}
+
 type OrchestrateUpOperation struct {
 	handler_dockercli.ClientOperationBase
 }
