@@ -1,15 +1,14 @@
 package command
 
 import (
-	"github.com/CoachApplication/command"
 	"github.com/CoachApplication/api"
 	"github.com/CoachApplication/base"
+	"github.com/CoachApplication/command"
 )
 
 type GetOperation struct {
 	command.GetOperation
 }
-
 
 func (gop *GetOperation) Operation() api.Operation {
 	return api.Operation(gop)
@@ -25,7 +24,6 @@ func (gop *GetOperation) Properties() api.Properties {
 
 func (gop *GetOperation) Exec(props api.Properties) api.Result {
 	res := base.NewResult()
-
 
 	return res.Result()
 }
