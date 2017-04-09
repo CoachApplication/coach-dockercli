@@ -29,7 +29,7 @@ func deployComposeFromCoachConfig(ctx context.Context, filename string, config c
 				return nil, fmt.Errorf("Unknown error occured retrieving compose details from compose source Config")
 			}
 		}
-	case ctx.Done():
+	case <-ctx.Done():
 		return nil, ctx.Err()
 	}
 

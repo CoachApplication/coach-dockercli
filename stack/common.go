@@ -12,8 +12,6 @@ import (
 	docker_cli_compose_convert "github.com/docker/docker/cli/compose/convert"
 	docker_client "github.com/docker/docker/client"
 	docker_opts "github.com/docker/docker/opts"
-	"sort"
-	"strings"
 )
 
 // checkDaemonIsSwarmManager does an Info API call to verify that the daemon is

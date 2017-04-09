@@ -14,7 +14,7 @@ func NewClientOperationBase(c *docker_client.Client) *ClientOperationBase {
 	}
 }
 func NewClientOperationBaseDefault() *ClientOperationBase {
-	c, _ := DefaultClient() // @TODO we don't catch this error, but we will need to
+	c, _ := DefaultClient() // @TODO we don't catch this error, but we should
 	return &ClientOperationBase{
 		client: c,
 	}
