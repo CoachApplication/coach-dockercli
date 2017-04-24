@@ -2,6 +2,9 @@ package configwrapper
 
 import (
 	"errors"
+	handler_docker_command "github.com/CoachApplication/handler-dockercli/command"
+	"github.com/CoachApplication/command"
+	"github.com/CoachApplication/base"
 )
 
 type Config struct {
@@ -48,7 +51,7 @@ func (cs *Commands) Get(id string) (Command, error) {
 	if com, found := cs.Commands[id]; found {
 		return com, nil
 	} else {
-		return nil, errors.New("Command not found")
+		return Command{}, errors.New("Command not found")
 	}
 
 }
@@ -83,11 +86,31 @@ type Command struct {
 	Ui        CommandUi        `yaml:"ui"`
 	Container CommandContainer `yaml:"container"`
 }
+
+// Use a Command factory to convert this Config Command to a core command.Command
+func (c *Command) CommandFromFactory(f handler_docker_command.Factory) (command.Command, error) {
+	return f.NewCommand(
+		c.Container.Id,
+		base.NewUi(
+			c.Container.Id,
+			c.Ui.Label,
+			c.Ui.Description,
+			c.Ui.Help,
+		),
+		base.ExternalOperationUsage{}.Usage(), // For now just assume that all commands are public
+		c.Container.Privileged,
+		c.Container.Image,
+		c.Container.Volumes,
+		c.Container.Links,
+	), nil
+}
+
 type CommandUi struct {
 	Label       string `yaml:"label"`
 	Description string `yaml:"description"`
 	Help        string `yaml:"help"`
 }
+
 type CommandContainer struct {
 	Id         string
 	Privileged bool     `yaml:"privileged"`

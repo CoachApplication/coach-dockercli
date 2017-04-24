@@ -188,9 +188,9 @@ func (c *Command) runCommand(res *base.Result, runId string, args []string) {
 		}
 		res.MarkFailed()
 	} else if response, err := c.cli.ContainerAttach(c.ctx, id, attachOptions); err != nil {
-
+		res.AddError(err)
 	} else {
-		//(types.HijackedResponse, error)
+		// var response docker_api_types.HijackedResponse
 		defer response.Close()
 
 	}
